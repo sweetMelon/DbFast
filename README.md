@@ -49,7 +49,7 @@ DbFastControl.getDbFast().init(this, config, clz_list);<br>
 
 DbFast创建的关键的地方就在这里了，基于对象关系映射的原理，我在这里认为每一个对象都是数据库里的一条记录，对象的class则是我数据库的一张表。
 
-所以，list的里面的每一个class对象，都会被我创建成一张表，到这里你应该就会有所领悟了，我们不需要再创建各种create table语句了，只需要把你想要创建的表的信息反过来生成一个class，就可以了。<br>
+所以，list的里面的类，都会被我创建成一张表，到这里你应该就会有所领悟了，我们不需要再创建各种create table语句了，只需要把你想要创建的表的信息反过来生成一个class，就可以了。<br>
 
 看class的一个例子<br>
     
@@ -65,12 +65,13 @@ DbFast创建的关键的地方就在这里了，基于对象关系映射的原�
     
     private String news_author;
 <br>
-   像我们创建类一样，类的属性，get setter方法。
-   所有你想要在数据库表里有的字段，都是你类的属性映射的。
+   像我们创建类一样，必须要有类的属性，get和setter方法,当然你也可以不写get和setter,只要你封装好访问Private属性的方法就行。
+   然后会把所有的private属性变量，映射成数据库的表的字段
 
    要注意的是：
-   <br>1.属性的name就是你表的字段名
-   <br>2.属性的访问修饰符只能是private
+   <br>1.表名就是创建的类的名字
+   <br>2.属性的name就是你表的字段名
+   <br>3.属性的访问修饰符只能是private
 ###2.查询接口
 ######条件查询接口:<br>
 public List<Object> query(Class<?> clz, String where, String[] whereArgs)
